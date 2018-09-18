@@ -30,10 +30,11 @@ class App extends Component {
   componentDidMount(){ // this fires when the component first mounts the dom
     console.log('component mounted');
   }
-  componentDidUpdate(prevProps, prevState, snapshot){
+  componentDidUpdate(prevProps, prevState, snapshot){ // this fires when we have a change of states or props
     console.log('component updated');
-    console.log(prevProps, prevState);
+    console.log(prevProps, prevState); // this is the props and the state before tha data was updated
   }
+
   render() {
     return (
       <div className="App">
