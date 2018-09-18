@@ -1,46 +1,35 @@
 import React, { Component } from 'react';
-import Ninjas from './Ninja/Ninjas'
-import AddNinja from './Ninja/AddNinja'
-import './App.css'
+import Todos from './Todos'
+import AddTodo from './AddTodo'
 
 class App extends Component {
   state = {
-    ninjas: [
-      { name: 'Ryu', age: 30, belt: 'black', id: 1 },
-      { name: 'Yoshi', age: 20, belt: 'green', id: 2 },
-      { name: 'Crystal', age: 25, belt: 'pink', id: 3 }
+    todos: [
+      {id: 1, content: 'buy some milk'},
+      {id: 2, content: 'play mario kart'}
     ]
   }
-  addNinja = (ninja) => {
-    ninja.id = Math.random();
-    let ninjas = [...this.state.ninjas, ninja];
-    this.setState({
-      ninjas: ninjas
-    });
-  }
-  deleteNinja = (id) => {
-    // console.log(id);
-    let ninjas = this.state.ninjas.filter(ninja => {
-      return ninja.id !== id
+  deleteTodo = (id) => {
+    const todos = this.state.todos.filter(todo => {
+      return todo.id !== id
     });
     this.setState({
-      ninjas: ninjas
+      todos
     });
   }
-  componentDidMount(){ // this fires when the component first mounts the dom
-    console.log('component mounted');
+  addTodo = (todo) => {
+    todo.id = Math.random();
+    let todos = [...this.state.todos, todo];
+    this.setState({
+      todos
+    });
   }
-  componentDidUpdate(prevProps, prevState, snapshot){ // this fires when we have a change of states or props
-    console.log('component updated');
-    console.log(prevProps, prevState); // this is the props and the state before tha data was updated
-  }
-
   render() {
     return (
-      <div className="App">
-        <h1>My first React app</h1>
-        <Ninjas ninjas={this.state.ninjas} deleteNinja={this.deleteNinja} />
-        <AddNinja addNinja={this.addNinja} />
+      <div className="todo-app container">
+        <h1 className="center blue-text">Todo's</h1>
+        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} />
+        <AddTodo addTodo={this.addTodo} />
       </div>
     );
   }
